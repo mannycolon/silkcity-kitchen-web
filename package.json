@@ -1,7 +1,7 @@
 {
   "name": "silkcity-kitchen-web",
   "version": "0.1.0",
-  "description": "Website for Silkcity Kitchen Meal Prep",
+  "description": "The website for Silkcity Kitchen Meal Prep",
   "scripts": {
     "build": "npm run build:next && npm run build:server",
     "build:next": "next build",
