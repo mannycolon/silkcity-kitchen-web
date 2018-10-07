@@ -1,3 +1,3 @@
 # silkcity-kitchen-web
 
-Website for Silkcity Kitchen Meal Prep
+The website for Silkcity Kitchen Meal Prep
