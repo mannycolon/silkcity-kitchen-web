@@ -1,16 +1,34 @@
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 import Header from '../Header'
 import Footer from '../Footer'
 
-import './Layout.styles.scss'
+const styles = {
+  layoutContainer: {
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    overflowY: 'auto',
+  },
+  layoutcontent: {
+    flex: 1,
+  }
+}
 
-const Layout = (props) => (
-  <div className="layout-container">
+
+const Layout = ({children, classes}) => (
+  <div className={classes.layoutContainer}>
     <Header/>
-    <div className="layout-content">
-      {props.children}
+    <div className={classes.layoutcontent}>
+      {children}
     </div>
     <Footer/>
   </div>
 )
 
-export default Layout
+Layout.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(Layout)

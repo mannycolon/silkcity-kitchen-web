@@ -4,20 +4,13 @@ import Link from 'next/link'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
+import Hidden from '@material-ui/core/Hidden'
 import Badge from '@material-ui/core/Badge'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
-import Hidden from '@material-ui/core/Hidden'
-
 import MenuIcon from '@material-ui/icons/Menu'
-// burger
-{/* <div className='burger-menu'>
-            <IconButton color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
-              <MenuIcon />
-            </IconButton>
-          </div> */}
+import MenuDrawer from '../MenuDrawer'
+import Button from '../Button'
 
 const styles = theme => ({
   toolbarContent: {
@@ -28,7 +21,7 @@ const styles = theme => ({
   },
   title: {
     fontWeight: 'bold',
-    color: '#000000',
+    color: 'var(--main-text-color)',
     textDecoration: 'none',
     userSelect: 'none',
     cursor: 'pointer'
@@ -41,6 +34,14 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
   },
+  logo: {
+    height: '60px',
+    width: '65px',
+    [theme.breakpoints.down('md')]: {
+      height: '50px',
+      width: '55px',
+    },
+  },
   menuItems: {
     display: 'flex',
     whiteSpace: 'nowrap',
@@ -49,29 +50,22 @@ const styles = theme => ({
     },
   },
   menuItem: {
-    color: '#47525E',
+    color: 'var(--main-text-color)',
     paddingRight: '16px',
     paddingLeft: '16px',
     cursor: 'pointer',
-  },
-  button: {
-    color: '#ffffff',
-    margin: theme.spacing.unit,
-    boxShadow: 'none',
-    whiteSpace: 'nowrap',
-  },
-  buttonOutlined: {
-    margin: theme.spacing.unit,
-    whiteSpace: 'nowrap',
+    "&:hover": {
+      color: "var(--primary-color)"
+    }
   },
   badge: {
     top: 1,
     right: -15,
-    color: '#ffffff',
-    border: '2px solid #ffffff',
+    color: 'var(--white-color)',
+    border: '2px solid var(--white-color)',
   },
   shoppingCartIcon: {
-    color: '#47525E'
+    color: 'var(--main-text-color)'
   }
 })
 
@@ -99,7 +93,7 @@ class Header extends Component {
           <div className={classes.leftSide}>
             <Link href="/" passHref>
               <a>
-                <img src="static/images/Silkcity kitchen Logo.png" alt="Silkcity kitchen Logo" height="70px" width="75px"/>
+                <img className={classes.logo} src="static/images/Silkcity kitchen Logo.png" alt="Silkcity kitchen Logo" />
               </a>
             </Link>
             <Hidden xsDown>
@@ -129,10 +123,10 @@ class Header extends Component {
           </div>
           <div className={classes.rightSide}>
             <Hidden xsDown>
-              <Button variant="outlined" color="secondary" className={classes.buttonOutlined}>
+              <Button variant="outlined" color="secondary" onClick={() => console.log('Sign In')}>
                 Sign In
               </Button>
-              <Button variant="contained" color="secondary" className={classes.button}>
+              <Button variant="contained" color="secondary" onClick={() => console.log('Sign Up')}>
                 Sign Up
               </Button>
             </Hidden>
@@ -143,6 +137,7 @@ class Header extends Component {
             </IconButton>
           </div>
         </Toolbar>
+        <MenuDrawer isDrawerVisible={this.state.isDrawerVisible} toggleDrawer={this.toggleDrawer} />
       </AppBar>
     )
   }
