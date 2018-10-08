@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import Badge from '@material-ui/core/Badge'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import Hidden from '@material-ui/core/Hidden'
 
 import MenuIcon from '@material-ui/icons/Menu'
 // burger
@@ -21,6 +22,8 @@ import MenuIcon from '@material-ui/icons/Menu'
 const styles = theme => ({
   toolbarContent: {
     display: 'flex',
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
   title: {
@@ -32,13 +35,18 @@ const styles = theme => ({
   },
   leftSide: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   rightSide: {
+    display: 'flex',
+    alignItems: 'center',
   },
   menuItems: {
     display: 'flex',
-    marginLeft: '60px'
+    whiteSpace: 'nowrap',
+    [theme.breakpoints.up('md')]: {
+      marginLeft: '42px'
+    },
   },
   menuItem: {
     color: '#47525E',
@@ -49,10 +57,12 @@ const styles = theme => ({
   button: {
     color: '#ffffff',
     margin: theme.spacing.unit,
-    boxShadow: 'none'
+    boxShadow: 'none',
+    whiteSpace: 'nowrap',
   },
   buttonOutlined: {
     margin: theme.spacing.unit,
+    whiteSpace: 'nowrap',
   },
   badge: {
     top: 1,
@@ -81,42 +91,51 @@ class Header extends Component {
     return (
       <AppBar position="static">
         <Toolbar classes={{ root: classes.toolbarContent }}>
+          <Hidden smUp>
+            <IconButton color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
           <div className={classes.leftSide}>
             <Link href="/" passHref>
-              <Typography className={classes.title} variant="headline" color="inherit" title="Fornix Systems">
-                Silkcity Kitchen
-              </Typography>
+              <a>
+                <img src="static/images/Silkcity kitchen Logo.png" alt="Silkcity kitchen Logo" height="70px" width="75px"/>
+              </a>
             </Link>
-            <div className={classes.menuItems}>
-              <Link href="/">
-                <a title="Home">
-                  <div className={classes.menuItem}>Home</div>
-                </a>
-              </Link>
-              <Link href="/meal-plans">
-                <a title="Meal Plans">
-                  <div className={classes.menuItem}>Meal Plans</div>
-                </a>
-              </Link>
-              <Link href="/about">
-                <a title="About">
-                  <div className={classes.menuItem}>About</div>
-                </a>
-              </Link>
-              <Link href="/support">
-                <a title="Support">
-                  <div className={classes.menuItem}>Support</div>
-                </a>
-              </Link>
-            </div>
+            <Hidden xsDown>
+              <div className={classes.menuItems}>
+                <Link href="/">
+                  <a title="Home">
+                    <div className={classes.menuItem}>Home</div>
+                  </a>
+                </Link>
+                <Link href="/meal-plans">
+                  <a title="Meal Plans">
+                    <div className={classes.menuItem}>Meal Plans</div>
+                  </a>
+                </Link>
+                <Link href="/about">
+                  <a title="About">
+                    <div className={classes.menuItem}>About</div>
+                  </a>
+                </Link>
+                <Link href="/support">
+                  <a title="Support">
+                    <div className={classes.menuItem}>Support</div>
+                  </a>
+                </Link>
+              </div>
+            </Hidden>
           </div>
           <div className={classes.rightSide}>
-            <Button variant="outlined" color="secondary" className={classes.buttonOutlined}>
-              Sign In
-            </Button>
-            <Button variant="contained" color="secondary" className={classes.button}>
-              Sign Up
-            </Button>
+            <Hidden xsDown>
+              <Button variant="outlined" color="secondary" className={classes.buttonOutlined}>
+                Sign In
+              </Button>
+              <Button variant="contained" color="secondary" className={classes.button}>
+                Sign Up
+              </Button>
+            </Hidden>
             <IconButton aria-label="Shopping Cart">
               <Badge badgeContent={badgeCount} color="secondary" classes={{ badge: classes.badge }}>
                 <ShoppingCartIcon classes={{root: classes.shoppingCartIcon }} />
