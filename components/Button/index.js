@@ -22,16 +22,17 @@ const ButtonComponent = ({
   color,
   fullWidth,
   disabled,
-  onClick
+  onClick,
+  className
 }) => {
-  let buttonClassName = classes.buttonContained
+  let buttonClassName = `${classes.buttonContained} ${className}`
 
   switch (variant) {
     case 'outlined':
       buttonClassName = classes.buttonOutlined
       break;
     case 'contained':
-      buttonClassName = classes.buttonContained
+      buttonClassName = `${classes.buttonContained} ${className}`
       break;
     default:
       break;

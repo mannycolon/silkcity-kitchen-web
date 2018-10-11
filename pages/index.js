@@ -5,7 +5,7 @@ class Index extends Component {
   render() {
     return (
       <Layout>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <h1>Home</h1>
         </div>
       </Layout>
