@@ -13,6 +13,10 @@ import MenuDrawer from '../MenuDrawer'
 import Button from '../Button'
 
 const styles = theme => ({
+  appBar: {
+    boxShadow: 'none',
+    borderBottom: '1px solid rgba(0,0,0,.0975)',
+  },
   toolbarContent: {
     display: 'flex',
     flex: 1,
@@ -46,7 +50,7 @@ const styles = theme => ({
     display: 'flex',
     whiteSpace: 'nowrap',
     [theme.breakpoints.up('md')]: {
-      marginLeft: '42px'
+      marginLeft: '30px'
     },
   },
   menuItem: {
@@ -83,7 +87,7 @@ class Header extends Component {
     const badgeCount = 0
 
     return (
-      <AppBar position="static">
+      <AppBar position="static" classes={{ root: classes.appBar }}>
         <Toolbar classes={{ root: classes.toolbarContent }}>
           <Hidden smUp>
             <IconButton color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
