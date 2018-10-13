@@ -1,19 +1,19 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import Link from 'next/link'
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import HomeIcon from '@material-ui/icons/Home';
-import LocalDiningIcon from '@material-ui/icons/LocalDining';
-import PeopleIcon from '@material-ui/icons/People';
-import ContactIcon from '@material-ui/icons/Email';
-import Icon from 'react-simple-icons';
+import { withStyles } from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
+import HomeIcon from '@material-ui/icons/Home'
+import LocalDiningIcon from '@material-ui/icons/LocalDining'
+import PeopleIcon from '@material-ui/icons/People'
+import ContactIcon from '@material-ui/icons/Email'
+import Icon from 'react-simple-icons'
 import Button from '../Button'
 
 const styles = theme => ({
@@ -137,11 +137,11 @@ const MenuDrawer = ({classes, isDrawerVisible, toggleDrawer}) => {
         </ListItem>
       </List>
     </Drawer>
-  );
-};
+  )
+}
 
 MenuDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(MenuDrawer);
+export default withStyles(styles)(MenuDrawer)
