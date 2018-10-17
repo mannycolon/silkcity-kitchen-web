@@ -8,7 +8,7 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     backgroundColor: 'var(--beige)',
-    height: '610px',
+    height: '620px',
     color: 'var(--main-text-color)',
     fontFamily: 'Lato',
     [theme.breakpoints.down('sm')]: {
@@ -83,7 +83,7 @@ const styles = theme => ({
     marginBottom: '20px',
     fontSize: '4.3em',
     textAlign: 'center',
-    lineHeight: '0.8',
+    lineHeight: '0.9',
     [theme.breakpoints.down('sm')]: {
       fontSize: '2em',
     },
