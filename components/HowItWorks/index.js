@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Hidden from '@material-ui/core/Hidden'
 import SmartphoneIcon from 'svg-reacticons/icons/SmartphoneOutline'
 import TruckIcon from 'svg-reacticons/icons/TruckOutline'
 import MicrowaveIcon from 'svg-reacticons/icons/MicrowaveOutline'
