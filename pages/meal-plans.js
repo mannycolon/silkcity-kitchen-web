@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import Layout from '../components/Layout'
+import MealPlans from '../components/MealPlans'
 
-class MealPlans extends Component {
+class MealPlansPage extends Component {
   render() {
     return (
       <Layout>
-        <div>
-          <h1>Meal Plans</h1>
-        </div>
+        <MealPlans title="Choose a Meal Plan" />
       </Layout>
     )
   }
 }
 
-export default MealPlans;
+export default MealPlansPage;
