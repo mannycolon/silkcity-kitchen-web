@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import SmartphoneIcon from 'svg-reacticons/icons/SmartphoneOutline'
-import TruckIcon from 'svg-reacticons/icons/TruckOutline'
-import MicrowaveIcon from 'svg-reacticons/icons/MicrowaveOutline'
+import SmartphoneIcon from 'svg-reacticons/lib/SmartphoneOutlined'
+import TruckIcon from 'svg-reacticons/lib/TruckOutlined'
+import MicrowaveIcon from 'svg-reacticons/lib/MicrowaveOutlined'
 // components
 import GreyCircle from '../GreyCircle'
 
@@ -74,13 +74,13 @@ const HowItWorks = ({classes}) => (
     <h2 className={classes.title}>How it Works</h2>
     <div className={classes.steps}>
       <Step header="Order Your Meals" classes={classes} description="Choose a meal plan based on your health and fitness goals.">
-        <SmartphoneIcon width={140} height={140} color="var(--primary-color)" />
+        <SmartphoneIcon size={140} color="var(--primary-color)" />
       </Step>
       <Step header="Freshly Made & Delivered" classes={classes} description="Enjoy delicious ingredients delivered straight to your doorstep">
-        <TruckIcon width={165} height={165} color="var(--primary-color)" />
+        <TruckIcon size={165} color="var(--primary-color)" />
       </Step>
       <Step header="Heat & Enjoy" classes={classes} description="Enjoy your delicious meal at your home, office, or on the go.">
-        <MicrowaveIcon width={150} height={150} color="var(--primary-color)" />
+        <MicrowaveIcon size={150} color="var(--primary-color)" />
       </Step>
     </div>
   </div>

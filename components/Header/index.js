@@ -9,8 +9,10 @@ import Hidden from '@material-ui/core/Hidden'
 import Badge from '@material-ui/core/Badge'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import MenuIcon from '@material-ui/icons/Menu'
+// core components
 import MenuDrawer from '../MenuDrawer'
 import Button from '../Button'
+import SignInModal from '../SignInModal'
 
 const styles = theme => ({
   appBar: {
@@ -76,7 +78,16 @@ const styles = theme => ({
 class Header extends Component {
   state = {
     isDrawerVisible: false,
+    signInModalOpen: false,
   }
+
+  openModal = () => {
+    this.setState({ signInModalOpen: true });
+  };
+
+  closeModal = () => {
+    this.setState({ signInModalOpen: false });
+  };
 
   toggleDrawer = (open) => () => {
     this.setState({ isDrawerVisible: open })
@@ -127,7 +138,7 @@ class Header extends Component {
           </div>
           <div className={classes.rightSide}>
             <Hidden xsDown>
-              <Button variant="outlined" color="secondary" onClick={() => console.log('Sign In')}>
+              <Button variant="outlined" color="secondary" onClick={() => this.openModal()}>
                 Sign In
               </Button>
               <Button variant="contained" color="secondary" onClick={() => console.log('Sign Up')}>
@@ -142,6 +153,7 @@ class Header extends Component {
           </div>
         </Toolbar>
         <MenuDrawer isDrawerVisible={this.state.isDrawerVisible} toggleDrawer={this.toggleDrawer} />
+        <SignInModal open={this.state.signInModalOpen} closeModal={this.closeModal} openModal={this.openModal} />
       </AppBar>
     )
   }

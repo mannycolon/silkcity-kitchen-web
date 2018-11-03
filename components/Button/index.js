@@ -17,6 +17,7 @@ const styles = theme => ({
 
 const ButtonComponent = ({
   classes,
+  parentClasses,
   children,
   variant,
   color,
@@ -42,6 +43,7 @@ const ButtonComponent = ({
     <Button
       variant={variant}
       color={color}
+      classes={parentClasses}
       className={buttonClassName}
       fullWidth={fullWidth}
       disabled={disabled}
@@ -54,6 +56,7 @@ const ButtonComponent = ({
 
 ButtonComponent.propTypes = {
   classes: PropTypes.object.isRequired,
+  parentClasses: PropTypes.object,
   children: PropTypes.node.isRequired,
   variant: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
