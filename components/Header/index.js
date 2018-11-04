@@ -12,7 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 // core components
 import MenuDrawer from '../MenuDrawer'
 import Button from '../Button'
-import SignInModal from '../SignInModal'
+import LoginModal from '../LoginModal'
 
 const styles = theme => ({
   appBar: {
@@ -78,20 +78,17 @@ const styles = theme => ({
 class Header extends Component {
   state = {
     isDrawerVisible: false,
-    signInModalOpen: false,
+    loginType: '',
+    loginModalOpen: false,
   }
 
-  openModal = () => {
-    this.setState({ signInModalOpen: true });
-  };
+  toggleDrawer = (open) => this.setState({ isDrawerVisible: open })
 
-  closeModal = () => {
-    this.setState({ signInModalOpen: false });
-  };
+  openSignInModal = () => this.setState({ loginModalOpen: true, loginType: 'signIn' })
 
-  toggleDrawer = (open) => () => {
-    this.setState({ isDrawerVisible: open })
-  }
+  openSignUpModal = () => this.setState({ loginModalOpen: true, loginType: 'signUp' })
+
+  closeLoginModal = () => this.setState({ loginModalOpen: false, loginType: '' })
 
   render() {
     const { classes } = this.props
@@ -101,7 +98,7 @@ class Header extends Component {
       <AppBar position="static" classes={{ root: classes.appBar }}>
         <Toolbar classes={{ root: classes.toolbarContent }}>
           <Hidden smUp>
-            <IconButton color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
+            <IconButton color="inherit" aria-label="Menu" onClick={() => this.toggleDrawer(true)}>
               <MenuIcon />
             </IconButton>
           </Hidden>
@@ -138,10 +135,10 @@ class Header extends Component {
           </div>
           <div className={classes.rightSide}>
             <Hidden xsDown>
-              <Button variant="outlined" color="secondary" onClick={() => this.openModal()}>
+              <Button variant="outlined" color="secondary" onClick={() => this.openSignInModal()}>
                 Sign In
               </Button>
-              <Button variant="contained" color="secondary" onClick={() => console.log('Sign Up')}>
+              <Button variant="contained" color="secondary" onClick={() => this.openSignUpModal()}>
                 Sign Up
               </Button>
             </Hidden>
@@ -153,7 +150,13 @@ class Header extends Component {
           </div>
         </Toolbar>
         <MenuDrawer isDrawerVisible={this.state.isDrawerVisible} toggleDrawer={this.toggleDrawer} />
-        <SignInModal open={this.state.signInModalOpen} closeModal={this.closeModal} openModal={this.openModal} />
+        <LoginModal
+          open={this.state.loginModalOpen}
+          loginType={this.state.loginType}
+          closeModal={this.closeLoginModal}
+          openSignInModal={this.openSignInModal}
+          openSignUpModal={this.openSignUpModal}
+        />
       </AppBar>
     )
   }

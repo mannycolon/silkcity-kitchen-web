@@ -14,6 +14,7 @@ import LocalDiningIcon from '@material-ui/icons/LocalDining'
 import PeopleIcon from '@material-ui/icons/People'
 import ContactIcon from '@material-ui/icons/Email'
 import Icon from 'react-simple-icons'
+// core components
 import Button from '../Button'
 
 const styles = theme => ({
@@ -45,20 +46,20 @@ const MenuDrawer = ({classes, isDrawerVisible, toggleDrawer}) => {
     <Drawer
       anchor="left"
       open={isDrawerVisible}
-      onClose={toggleDrawer(false)}
+      onClose={() => toggleDrawer(false)}
       classes={{
         paper: classes.drawerPaper,
       }}
     >
       <div className={`${classes.toolbar} ${classes.topDrawerContainer}`}>
-        <IconButton className={classes.closeIcon} onClick={toggleDrawer(false)}>
+        <IconButton className={classes.closeIcon} onClick={() => toggleDrawer(false)}>
           <CloseIcon />
         </IconButton>
       </div>
-      <Button variant="outlined" color="secondary" onClick={toggleDrawer(false)}>
+      <Button variant="outlined" color="secondary" onClick={() => toggleDrawer(false)}>
         Sign In
       </Button>
-      <Button variant="contained" color="secondary" onClick={toggleDrawer(false)}>
+      <Button variant="contained" color="secondary" onClick={() => toggleDrawer(false)}>
         Sign Up
       </Button>
       <List component="nav">
