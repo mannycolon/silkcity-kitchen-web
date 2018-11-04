@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import withMobileDialog from '@material-ui/core/withMobileDialog'
-import FormControl from '@material-ui/core/FormControl'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
 import Input from '@material-ui/core/OutlinedInput'
-import TextField from '@material-ui/core/TextField'
+import FormControl from '@material-ui/core/FormControl'
+import FormHelperText from '@material-ui/core/FormHelperText'
 // core components
 import GoogleButton from '../GoogleButton'
 import FacebookButton from '../FacebookButton'
@@ -17,14 +20,33 @@ import { validateEmail } from '../../lib/dataValidators'
 
 const styles = (theme) => ({
   dialogRoot: {
-    flex: '1'
+    flex: '1',
+    "& a": {
+      color: 'var(--description-text-color)',
+      "&:hover": {
+        color: "var(--main-text-color)"
+      }
+    },
   },
   dialog: {
     minHeight: '480px',
     minWidth: '500px',
+    [theme.breakpoints.down('sm')]: {
+      minHeight: '0px',
+      minWidth: '0px',
+    },
+  },
+  closeButtonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    width: '100%'
   },
   title: {
-    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '10px 24px 20px'
   },
   titleText: {
     color: 'var(--main-text-color)',
@@ -34,7 +56,11 @@ const styles = (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: '0 24px 48px',
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'flex-start',
+    },
   },
   contentText: {
     display: 'flex',
@@ -48,8 +74,35 @@ const styles = (theme) => ({
     cursor: 'pointer',
   },
   orEmail: {
+    width: '300px',
+    lineHeight: '0.2',
+    textAlign: 'center',
+    fontSize: '0.8125rem',
     color: 'var(--description-text-color)',
-    margin: '10px',
+    "& span": {
+      display: 'inline-block',
+      position: 'relative',
+      "&:before, &:after": {
+        content: "' '",
+        position: 'absolute',
+        height: '1px',
+        backgroundColor: '#CCCCCC',
+        top: 0,
+        width: '100px',
+      }
+    },
+    "& span:before": {
+      right: '100%',
+      marginRight: '10px'
+    },
+    "& span:after": {
+      left: '100%',
+      marginLeft: '10px'
+    }
+  },
+  formControl: {
+    display: 'flex',
+    alignItems: 'center',
   },
   input: {
     width: '300px',
@@ -59,9 +112,6 @@ const styles = (theme) => ({
     borderColor: 'var(--main-text-color)',
     borderRadius: '4px',
     padding: '20px 0px',
-    [theme.breakpoints.down('sm')]: {
-      width: '100%',
-    },
   },
   inputNotchedOutline: {
     borderColor: 'var(--main-text-color)',
@@ -72,6 +122,15 @@ const styles = (theme) => ({
   signInButton: {
     width: '300px',
     height: '40px',
+  },
+  error: {
+    width: '300px',
+    marginTop: '0px'
+  },
+  forgotPassword: {
+    margin: '0px',
+    color: 'var(--description-text-color)',
+    fontSize: '1rem',
   }
 })
 
@@ -120,11 +179,9 @@ class SignInModal extends Component {
     const { email, password } = this.state;
     let valid = false;
 
-    console.log(email, password)
     if (email && password) valid = true;
 
     if (!email || !validateEmail(email)) {
-      console.log('validateEmail')
       this.setState({ emailErrorText: 'This field is required.' })
       valid = false;
     } else {
@@ -132,7 +189,6 @@ class SignInModal extends Component {
     }
 
     if (!password) {
-      console.log('!password')
       valid = false;
       this.setState({ passwordErrorText: 'This field is required.' })
     } else {
@@ -154,6 +210,11 @@ class SignInModal extends Component {
         scroll="body"
         classes={{ root: classes.dialogRoot, paper: classes.dialog}}
       >
+        <div className={classes.closeButtonContainer}>
+          <IconButton onClick={closeModal} aria-label="Close">
+            <CloseIcon/>
+          </IconButton>
+        </div>
         <DialogTitle id="responsive-dialog-title" classes={{ root: classes.title}}>
           <div className={classes.titleText}>Sign in</div>
         </DialogTitle>
@@ -168,10 +229,10 @@ class SignInModal extends Component {
           </div>
           <FacebookButton onClick={() => console.log('GoogleButton')} text="Sign in with Facebook"/>
           <GoogleButton onClick={() => console.log('GoogleButton')} text="Sign in with Google"/>
-          <div className={classes.orEmail}>
-            or with email
-          </div>
-          <FormControl error={this.state.emailErrorText ? true : false}>
+          <p className={classes.orEmail}>
+            <span>or with email</span>
+          </p>
+          <FormControl classes={{root: classes.formControl}} error={this.state.emailErrorText ? true : false}>
             <Input
               placeholder="Email"
               classes={{
@@ -187,18 +248,18 @@ class SignInModal extends Component {
               labelWidth={100}
               notched={false}
               required
-              error
               onChange={(event) => this.validateEmailText(event.target.value.trim())}
             />
+            {this.state.emailErrorText && <FormHelperText classes={{root: classes.error}} id="component-error-text">{this.state.emailErrorText}</FormHelperText>}
           </FormControl>
-          <FormControl error={this.state.passwordErrorText ? true : false}>
-            <TextField
+          <FormControl classes={{root: classes.formControl}} error={this.state.passwordErrorText ? true : false}>
+            <Input
               placeholder="Password"
-              // classes={{
-              //   root: classes.input,
-              //   notchedOutline: classes.inputNotchedOutline,
-              //   input: classes.innerInput,
-              // }}
+              classes={{
+                root: classes.input,
+                notchedOutline: classes.inputNotchedOutline,
+                input: classes.innerInput,
+              }}
               type="password"
               autoComplete="password"
               inputProps={{
@@ -207,14 +268,16 @@ class SignInModal extends Component {
               labelWidth={100}
               notched={false}
               required
-              variant="outlined"
-              error={this.state.passwordErrorText ? true : false}
               onChange={(event) => this.validatePasswordText(event.target.value)}
             />
+            {this.state.passwordErrorText && <FormHelperText classes={{root: classes.error}} id="component-error-text">{this.state.passwordErrorText}</FormHelperText>}
           </FormControl>
           <Button parentClasses={{root:classes.signInButton}} variant="contained" color="secondary" onClick={this.onSubmit}>
             Sign in
           </Button>
+          <div className={classes.forgotPassword}>
+            <Link href="/password-reset"><a>Forgot your password?</a></Link>
+          </div>
         </DialogContent>
       </Dialog>
     )
