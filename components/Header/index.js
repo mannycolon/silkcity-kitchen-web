@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
+import Router from 'next/router'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -142,7 +143,7 @@ class Header extends Component {
                 Sign Up
               </Button>
             </Hidden>
-            <IconButton aria-label="Shopping Cart">
+            <IconButton aria-label="Shopping Cart" onClick={() => Router.push('/cart')}>
               <Badge badgeContent={badgeCount} color="secondary" classes={{ badge: classes.badge }}>
                 <ShoppingCartIcon classes={{root: classes.shoppingCartIcon }} />
               </Badge>
