@@ -24,7 +24,7 @@ const styles = {
 }
 
 const FacebookButton = ({ classes, onClick, text }) => (
-  <Buttton parentClasses={{root:classes.fbButton}} variant="contained" color="secondary" onClick={() => onClick()}>
+  <Buttton parentClasses={{root:classes.fbButton}} variant="contained" color="primary" onClick={() => onClick()}>
     <div className={classes.content}>
       <Icon
         className={classes.icon}

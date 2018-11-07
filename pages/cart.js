@@ -13,7 +13,7 @@ class CartPage extends Component {
           <p>
             Your cart is currently empty.
           </p>
-          <Button variant="contained" color="secondary" onClick={() => Router.push('/meal-plans')}>
+          <Button variant="contained" color="primary" onClick={() => Router.push('/meal-plans')}>
             Go To Meal Plans
           </Button>
         </div>

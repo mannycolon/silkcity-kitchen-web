@@ -104,7 +104,7 @@ const GetStartedContainer = ({classes}) => (
     <div className={classes.centerContent}>
       <div className={classes.topMessage}>Eat Better. Feel Better.</div>
       <h1 className={classes.title}>Healthy Meals <br/>Delivered</h1>
-      <Button className={classes.button} variant="contained" color="secondary" onClick={() => Router.push('/meal-plans')}>
+      <Button className={classes.button} variant="contained" color="primary" onClick={() => Router.push('/meal-plans')}>
         Get Started
       </Button>
     </div>

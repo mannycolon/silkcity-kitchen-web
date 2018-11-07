@@ -72,9 +72,6 @@ const styles = (theme) => ({
     borderRadius: '4px',
     padding: '20px 0px',
   },
-  inputNotchedOutline: {
-    borderColor: 'var(--main-text-color)',
-  },
   innerInput: {
     padding: '10px'
   },
@@ -95,14 +92,15 @@ const styles = (theme) => ({
 
 const SignInContent = ({
   classes,
-  emailErrorText,
+  emailError,
+  onEmailChange,
   validateEmailText,
-  passwordErrorText,
+  passwordError,
   validatePasswordText,
   onSubmit,
   signInWithFacebook,
   signInWithGoogle,
-  openSignUpModal,
+  switchLoginScreen,
 }) => {
   return (
     <DialogContent classes={{ root: classes.content}}>
@@ -110,7 +108,7 @@ const SignInContent = ({
         <div className={classes.description}>
           New to Silkcity Kitchen?
         </div>&nbsp;
-        <div className={classes.signUp} onClick={() => openSignUpModal()}>
+        <div className={classes.signUp} onClick={() => switchLoginScreen('signUp')}>
           Sign up
         </div>
       </div>
@@ -119,12 +117,11 @@ const SignInContent = ({
       <p className={classes.orEmail}>
         <span>or with email</span>
       </p>
-      <FormControl classes={{root: classes.formControl}} error={emailErrorText ? true : false}>
+      <FormControl classes={{root: classes.formControl}} error={emailError ? true : false}>
         <Input
           placeholder="Email"
           classes={{
             root: classes.input,
-            notchedOutline: classes.inputNotchedOutline,
             input: classes.innerInput,
           }}
           type="email"
@@ -135,21 +132,21 @@ const SignInContent = ({
           labelWidth={100}
           notched={false}
           required
-          onChange={(event) => validateEmailText(event.target.value.trim())}
+          onChange={(event) => onEmailChange(event.target.value.trim())}
+          onBlur={(event) => validateEmailText(event.target.value.trim())}
         />
         {
-          emailErrorText &&
+          emailError &&
           <FormHelperText classes={{root: classes.error}} id="component-error-text">
-            {emailErrorText}
+            {emailError}
           </FormHelperText>
         }
       </FormControl>
-      <FormControl classes={{root: classes.formControl}} error={passwordErrorText ? true : false}>
+      <FormControl classes={{root: classes.formControl}} error={passwordError ? true : false}>
         <Input
           placeholder="Password"
           classes={{
             root: classes.input,
-            notchedOutline: classes.inputNotchedOutline,
             input: classes.innerInput,
           }}
           type="password"
@@ -163,13 +160,13 @@ const SignInContent = ({
           onChange={(event) => validatePasswordText(event.target.value)}
         />
         {
-          passwordErrorText &&
+          passwordError &&
           <FormHelperText classes={{root: classes.error}} id="component-error-text">
-            {passwordErrorText}
+            {passwordError}
           </FormHelperText>
         }
       </FormControl>
-      <Button parentClasses={{root:classes.signInButton}} variant="contained" color="secondary" onClick={onSubmit}>
+      <Button parentClasses={{root:classes.signInButton}} variant="contained" color="primary" onClick={onSubmit}>
         Sign in
       </Button>
       <div className={classes.forgotPassword}>
@@ -181,14 +178,15 @@ const SignInContent = ({
 
 SignInContent.propTypes = {
   classes: PropTypes.object.isRequired,
-  emailErrorText: PropTypes.string.isRequired,
+  onEmailChange: PropTypes.func.isRequired,
+  emailError: PropTypes.string.isRequired,
   validateEmailText: PropTypes.func.isRequired,
-  passwordErrorText: PropTypes.string.isRequired,
+  passwordError: PropTypes.string.isRequired,
   validatePasswordText: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   signInWithFacebook: PropTypes.func.isRequired,
   signInWithGoogle: PropTypes.func.isRequired,
-  openSignUpModal: PropTypes.func.isRequired,
+  switchLoginScreen: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(SignInContent)

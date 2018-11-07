@@ -214,7 +214,7 @@ const Footer = ({classes, businessName, address, phoneNumber}) => {
                   'aria-label': 'email',
                 }}
               />
-              <Button className={classes.subscribeButton} variant="contained" color="secondary" onClick={() => console.log('Subscribe')}>
+              <Button className={classes.subscribeButton} variant="contained" color="primary" onClick={() => console.log('Subscribe')}>
                 Subscribe
               </Button>
             </div>

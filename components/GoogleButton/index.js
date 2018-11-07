@@ -33,7 +33,7 @@ const styles = {
 }
 
 const GoogleButton = ({ classes, onClick, text }) => (
-  <Buttton parentClasses={{root:classes.googleButton}} variant="contained" color="secondary" onClick={() => onClick()}>
+  <Buttton parentClasses={{root:classes.googleButton}} variant="contained" color="primary" onClick={() => onClick()}>
     <div className={classes.content}>
       <div className={classes.iconWrapper}>
         <GoogleIcon

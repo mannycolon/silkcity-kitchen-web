@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 // core components
 import SignInContent from './SignInContent';
+import SignUpContent from './SignUpContent';
 // helpers
 import { validateEmail } from '../../lib/dataValidators'
 
@@ -47,78 +48,235 @@ const styles = (theme) => ({
   },
 })
 
+const INITIAL_STATE = {
+  signIn: {
+    email: '',
+    password: '',
+  },
+  signUp: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    number: '',
+    password: '',
+  },
+  firstNameError: '',
+  lastNameError: '',
+  emailError: '',
+  passwordError: '',
+  numberError: '',
+  showPassword: false
+}
+
 class LoginModal extends Component {
-  constructor() {
-    super();
-    this.state = {
+  state = {
+    signIn: {
       email: '',
       password: '',
-      emailErrorText: '',
-      passwordErrorText: '',
-    };
-    this.onSubmit = this.onSubmit.bind(this);
-    this.validateAttributes = this.validateAttributes.bind(this);
-    this.validateEmailText = this.validateEmailText.bind(this);
-    this.validatePasswordText = this.validatePasswordText.bind(this);
+    },
+    signUp: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      number: '',
+      password: '',
+    },
+    firstNameError: '',
+    lastNameError: '',
+    emailError: '',
+    passwordError: '',
+    numberError: '',
+    showPassword: false
   }
 
-  validateEmailText(email) {
-    this.setState({ email })
+  onEmailChange = email => event => {
+    this.setState({
+      signIn: {
+        ...this.state.signIn,
+        [email]: event.target.value,
+      }
+    })
+  }
+
+  validateEmailText = (email) => {
+    this.setState({ signIn: { ...this.state.signIn, email }})
+
     if(!validateEmail(email)) {
-      this.setState({ emailErrorText: 'Please enter a valid email address.' })
+      this.setState({ emailError: 'Please enter a valid email address.' })
     } else {
-      this.setState({ emailErrorText: '' })
+      this.setState({ emailError: '' })
     }
   }
 
-  validatePasswordText(password) {
-    this.setState({ password })
+  validatePasswordText = (password) => {
+    this.setState({ signIn: { ...this.state.signIn, password }})
+
     if (!password) {
-      this.setState({ passwordErrorText: 'This field is required.' })
+      this.setState({ passwordError: 'This field is required.' })
     } else {
-      this.setState({ passwordErrorText: '' })
+      this.setState({ passwordError: '' })
     }
   }
 
-  onSubmit() {
-    const { name, email } = this.state;
-
-    if (this.validateAttributes()) {
-      //submit Form
-    }
+  handleSignUpNameChange = firstName => event => {
+    this.setState({
+      signUp: {
+        ...this.state.signUp,
+        [firstName]: event.target.value,
+      }
+    })
   }
 
-  validateAttributes() {
-    const { email, password } = this.state;
+  handleSignUpLastNameChange = lastName => event => {
+    this.setState({
+      signUp: {
+        ...this.state.signUp,
+        [lastName]: event.target.value,
+      }
+    })
+  }
+
+  handleSignUpEmailChange = email => event => {
+    this.setState({
+      signUp: {
+        ...this.state.signUp,
+        [email]: event.target.value,
+      }
+    })
+  }
+
+  handleSignUpNumberChange = number => event => {
+    this.setState({
+      signUp: {
+        ...this.state.signUp,
+        [number]: event.target.value,
+      }
+    })
+  }
+
+  handleSignUpPasswordChange = password => event => {
+    this.setState({
+      signUp: {
+        ...this.state.signUp,
+        [password]: event.target.value,
+      }
+    })
+  }
+
+  handleSignUpClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }))
+  }
+
+  validateAttributes = () => {
+    const { loginType } = this.props
+    const { firstName, lastName, email, number, password } = this.state[loginType];
     let valid = false;
 
-    if (email && password) valid = true;
-
-    if (!email || !validateEmail(email)) {
-      this.setState({ emailErrorText: 'This field is required.' })
-      valid = false;
+    if (loginType === 'signIn') {
+      valid = this.validateSignInItems(email, password)
     } else {
-      this.setState({ emailErrorText: '' })
-    }
-
-    if (!password) {
-      valid = false;
-      this.setState({ passwordErrorText: 'This field is required.' })
-    } else {
-      this.setState({ passwordErrorText: '' })
+      valid = this.validateSignUpItems(firstName, lastName, email, number, password)
     }
 
     return valid;
   }
 
+  validateSignInItems = (email, password) => {
+    let valid = false;
+
+    if (email && password) valid = true;
+
+    if (!email || !validateEmail(email)) {
+      this.setState({ emailError: 'This field is required.' })
+      valid = false;
+    } else {
+      this.setState({ emailError: '' })
+    }
+
+    if (!password) {
+      valid = false;
+      this.setState({ passwordError: 'This field is required.' })
+    } else {
+      this.setState({ passwordError: '' })
+    }
+
+    return valid;
+  }
+
+  validateSignUpItems = (firstName, lastName, email, number, password) => {
+    let valid = false;
+
+    if (firstName && lastName && email && number && password) valid = true;
+
+    if (!firstName) {
+      console.log('firstNameError')
+      valid = false;
+      this.setState({ firstNameError: 'This field is required.' })
+    } else {
+      this.setState({ firstNameError: '' })
+    }
+
+    if (!lastName) {
+      valid = false;
+      this.setState({ lastNameError: 'This field is required.' })
+    } else {
+      this.setState({ lastNameError: '' })
+    }
+
+    if (!email || !validateEmail(email)) {
+      this.setState({ emailError: 'This field is required.' })
+      valid = false;
+    } else {
+      this.setState({ emailError: '' })
+    }
+
+    if (!number) {
+      valid = false;
+      this.setState({ numberError: 'This field is required.' })
+    } else {
+      this.setState({ numberError: '' })
+    }
+
+    if (!password) {
+      valid = false;
+      this.setState({ passwordError: 'This field is required.' })
+    } else {
+      this.setState({ passwordError: '' })
+    }
+
+    return valid;
+  }
+
+  screenTransition = (loginType) => {
+    const { switchLoginScreen } = this.props
+
+    this.setState({
+      firstNameError: '',
+      lastNameError: '',
+      emailError: '',
+      passwordError: '',
+      numberError: ''
+    })
+    switchLoginScreen(loginType)
+  }
+
+  onSubmit = () => {
+    if (this.validateAttributes()) {
+      //submit Form
+    }
+  }
+
   render() {
-    const { classes, fullScreen, open, closeModal, loginType, openSignInModal, openSignUpModal } = this.props
+    const { classes, fullScreen, open, closeModal, loginType } = this.props
 
     return (
       <Dialog
         fullScreen={fullScreen}
         open={open}
-        onClose={closeModal}
+        onClose={() => {
+          this.setState(INITIAL_STATE)
+          closeModal()
+        }}
         aria-labelledby="responsive-dialog-title"
         scroll="body"
         classes={{ root: classes.dialogRoot, paper: classes.dialogPaper}}
@@ -138,17 +296,41 @@ class LoginModal extends Component {
         {
           loginType === 'signIn' ?
             <SignInContent
-              emailErrorText={this.state.emailErrorText}
-              passwordErrorText={this.state.passwordErrorText}
               onSubmit={this.onSubmit}
+              switchLoginScreen={this.screenTransition}
+              onEmailChange={this.onEmailChange}
               validateEmailText={this.validateEmailText}
               validatePasswordText={this.validatePasswordText}
-              openSignUpModal={openSignUpModal}
               signInWithFacebook={() => console.log('signInWithFacebook')}
               signInWithGoogle={() => console.log('signInWithGoogle')}
+              emailError={this.state.emailError}
+              passwordError={this.state.passwordError}
             />
           :
-          <div>Sign Up Content</div>
+            <SignUpContent
+              onSubmit={this.onSubmit}
+              switchLoginScreen={this.screenTransition}
+              firstName={this.state.signUp.firstName}
+              lastName={this.state.signUp.lastName}
+              email={this.state.signUp.email}
+              number={this.state.signUp.number}
+              password={this.state.signUp.password}
+              showPassword={this.state.showPassword}
+              signUpWithFacebook={() => console.log('signUpWithFacebook')}
+              signUpWithGoogle={() => console.log('signUpWithGoogle')}
+              firstNameError={this.state.firstNameError}
+              lastNameError={this.state.lastNameError}
+              emailError={this.state.emailError}
+              numberError={this.state.numberError}
+              passwordError={this.state.passwordError}
+              handleNameChange={this.handleSignUpNameChange}
+              handleLastNameChange={this.handleSignUpLastNameChange}
+              handleEmailChange={this.handleSignUpEmailChange}
+              handleNumberChange={this.handleSignUpNumberChange}
+              handlePasswordChange={this.handleSignUpPasswordChange}
+              handleClickShowPassword={this.handleSignUpClickShowPassword}
+              validateAttributes={this.validateAttributes}
+            />
         }
       </Dialog>
     )
@@ -160,8 +342,7 @@ LoginModal.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
-  openSignInModal: PropTypes.func.isRequired,
-  openSignUpModal: PropTypes.func.isRequired,
+  switchLoginScreen: PropTypes.func.isRequired,
   openModal: PropTypes.func,
 }
 

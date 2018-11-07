@@ -17,7 +17,7 @@ const styles = theme => ({
     },
   },
   title: {
-    fontSize: '3em',
+    fontSize: '2.5em',
     marginTop: '0px',
     marginBottom: '15px',
     [theme.breakpoints.down('sm')]: {
@@ -97,7 +97,7 @@ const PlanSubCategory = ({classes, price, description}) => (
   <div className={classes.subcategoryContainer}>
     <h2 className={classes.priceHeader}>${price}</h2>
     <p className={classes.description}>{description}</p>
-    <Button variant="contained" color="secondary" onClick={() => console.log('PlanSubCategory')}>
+    <Button variant="contained" color="primary" onClick={() => console.log('PlanSubCategory')}>
       Choose
     </Button>
   </div>

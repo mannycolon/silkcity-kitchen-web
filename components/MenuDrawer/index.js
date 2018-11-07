@@ -56,10 +56,10 @@ const MenuDrawer = ({classes, isDrawerVisible, toggleDrawer}) => {
           <CloseIcon />
         </IconButton>
       </div>
-      <Button variant="outlined" color="secondary" onClick={() => toggleDrawer(false)}>
+      <Button variant="outlined" color="primary" onClick={() => toggleDrawer(false)}>
         Sign In
       </Button>
-      <Button variant="contained" color="secondary" onClick={() => toggleDrawer(false)}>
+      <Button variant="contained" color="primary" onClick={() => toggleDrawer(false)}>
         Sign Up
       </Button>
       <List component="nav">

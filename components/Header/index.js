@@ -17,6 +17,7 @@ import LoginModal from '../LoginModal'
 
 const styles = theme => ({
   appBar: {
+    backgroundColor: '#ffffff',
     boxShadow: 'none',
     borderBottom: '1px solid rgba(0,0,0,.0975)',
   },
@@ -85,9 +86,7 @@ class Header extends Component {
 
   toggleDrawer = (open) => this.setState({ isDrawerVisible: open })
 
-  openSignInModal = () => this.setState({ loginModalOpen: true, loginType: 'signIn' })
-
-  openSignUpModal = () => this.setState({ loginModalOpen: true, loginType: 'signUp' })
+  switchLoginScreen = (loginType) => this.setState({ loginModalOpen: true, loginType })
 
   closeLoginModal = () => this.setState({ loginModalOpen: false, loginType: '' })
 
@@ -136,15 +135,15 @@ class Header extends Component {
           </div>
           <div className={classes.rightSide}>
             <Hidden xsDown>
-              <Button variant="outlined" color="secondary" onClick={() => this.openSignInModal()}>
+              <Button variant="outlined" color="primary" onClick={() => this.switchLoginScreen('signIn')}>
                 Sign In
               </Button>
-              <Button variant="contained" color="secondary" onClick={() => this.openSignUpModal()}>
+              <Button variant="contained" color="primary" onClick={() => this.switchLoginScreen('signUp')}>
                 Sign Up
               </Button>
             </Hidden>
             <IconButton aria-label="Shopping Cart" onClick={() => Router.push('/cart')}>
-              <Badge badgeContent={badgeCount} color="secondary" classes={{ badge: classes.badge }}>
+              <Badge badgeContent={badgeCount} color="primary" classes={{ badge: classes.badge }}>
                 <ShoppingCartIcon classes={{root: classes.shoppingCartIcon }} />
               </Badge>
             </IconButton>
@@ -155,7 +154,7 @@ class Header extends Component {
           open={this.state.loginModalOpen}
           loginType={this.state.loginType}
           closeModal={this.closeLoginModal}
-          openSignInModal={this.openSignInModal}
+          switchLoginScreen={this.switchLoginScreen}
           openSignUpModal={this.openSignUpModal}
         />
       </AppBar>
