@@ -13,6 +13,7 @@ const styles = {
     alignItems: 'center',
     padding: '30px',
     minHeight: '400px',
+    color: 'var(--main-text-color)',
   },
   content: {
     display: 'flex',

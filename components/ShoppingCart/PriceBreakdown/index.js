@@ -3,11 +3,12 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = {
   container: {
-    width: "300px",
+    width: "350px",
     height: "320px",
     backgroundColor: "var(--white-color)",
-    border: "1px solid #8492A6",
-    borderRadius: "5px",
+    border: "1px solid #e0e0e0",
+    borderRadius: "3px",
+    padding: "15px",
     margin: '15px'
   }
 }
