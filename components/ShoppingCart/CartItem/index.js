@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Trash from 'svg-reacticons/lib/TrashOutlined'
 
-const styles = {
+const styles = (theme) => ({
   container: {
     display: "flex",
     justifyContent: "space-around",
@@ -12,7 +12,12 @@ const styles = {
     border: "1px solid #dbdbdb",
     borderRadius: "3px",
     padding: "15px 15px 20px",
-    margin: '15px'
+    margin: '15px',
+    [theme.breakpoints.down('sm')]: {
+      width: "100%",
+      margin: '10px 0px',
+      padding: "12px"
+    },
   },
   left: {
     flex: 1,
@@ -22,11 +27,18 @@ const styles = {
   image: {
     height: '100px',
     width: '100px',
+    [theme.breakpoints.down('sm')]: {
+      height: '60px',
+      width: '60px',
+    },
   },
   center: {
     flex: 3,
     display: 'flex',
     flexDirection: "column",
+    [theme.breakpoints.down('sm')]: {
+      padding:'5px'
+    }
   },
   title: {
     color: 'var(--main-text-color)',
@@ -52,7 +64,7 @@ const styles = {
     alignSelf: 'flex-end',
     cursor: 'pointer'
   }
-}
+})
 
 const CartItem = ({
   classes
@@ -65,7 +77,7 @@ const CartItem = ({
       <div className={classes.center}>
         <h3 className={classes.title}>Trimdown Program</h3>
         <p className={classes.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt congue ligula in rutrum. Morbi nec lacus condimentum, hendrerit mi eu, feugiat.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt congue ligula in rutrum.
         </p>
       </div>
       <div className={classes.right}>

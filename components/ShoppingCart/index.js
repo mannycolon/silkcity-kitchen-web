@@ -5,7 +5,7 @@ import EmptyCartAlert from '../EmptyCartAlert'
 import CartItem from './CartItem'
 import PriceBreakdown from './PriceBreakdown'
 
-const styles = {
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -14,11 +14,23 @@ const styles = {
     padding: '30px',
     minHeight: '400px',
     color: 'var(--main-text-color)',
+    [theme.breakpoints.down('sm')]: {
+      padding: '10px 12px',
+    },
+  },
+  title: {
+    [theme.breakpoints.down('sm')]: {
+      margin: '12px'
+    },
   },
   content: {
     display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+      alignItems: 'center'
+    },
   }
-}
+})
 
 const ShoppingCart = ({
   classes,
@@ -26,12 +38,15 @@ const ShoppingCart = ({
 }) => {
   return (
     <div className={classes.container}>
-      <h1>Your Cart</h1>
+      <h1 className={classes.title}>Your Cart</h1>
       <div>
         {
           items.length > 0 ?
           <div className={classes.content}>
-            <CartItem/>
+            <div className={classes.cartItems}>
+              <CartItem/>
+              <CartItem/>
+            </div>
             <PriceBreakdown/>
           </div>
           :
