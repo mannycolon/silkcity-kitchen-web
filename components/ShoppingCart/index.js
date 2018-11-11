@@ -11,7 +11,7 @@ const styles = (theme) => ({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: '30px',
+    padding: '0px 30px 30px',
     minHeight: '400px',
     color: 'var(--main-text-color)',
     [theme.breakpoints.down('sm')]: {
