@@ -20,6 +20,8 @@ const styles = (theme) => ({
     borderRadius: "3px",
     padding: "20px",
     margin: '15px',
+    boxShadow: '0 1px 3px 0 rgba(0,0,0,0.15)',
+    boxSizing: 'border-box',
     [theme.breakpoints.down('sm')]: {
       width: "100%",
       margin: '10px 0px',
