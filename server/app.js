@@ -1,10 +1,13 @@
 import express from 'express'
 import next from 'next'
-import helmet from 'helmet';
+import morgan from 'morgan'
+import helmet from 'helmet'
+import bodyParser from 'body-parser'
+import { BraintreeRoutes } from './routes'
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = parseInt(process.env.PORT, 10) || 8000
-const ROOT_URL = dev ? `http://localhost:${port}` : 'https://PRODUCTION_URL';
+const ROOT_URL = dev ? `http://localhost:${port}` : 'https://PRODUCTION_URL'
 
 const app = next({ dev })
 const handle = app.getRequestHandler()
@@ -13,10 +16,17 @@ const handle = app.getRequestHandler()
 app.prepare()
   .then(() => {
     const server = express()
+    const morganFormat = dev === 'production' ? 'combined' : 'dev'
 
-    server.use(helmet());
+    server.use(helmet())
+    server.use(morgan(morganFormat))
+    server.use(bodyParser.json())
+    server.use(bodyParser.urlencoded({ extended: true }))
 
-    server.get('*', (req, res) => handle(req, res));
+    // Add routes after setting up middleware
+    server.use('/api', [BraintreeRoutes])
+
+    server.get('*', (req, res) => handle(req, res))
 
     // starting express server
     server.listen(port, err => {

@@ -17,13 +17,17 @@
     "@material-ui/core": "^3.3.2",
     "@material-ui/icons": "^3.0.1",
     "@zeit/next-sass": "^1.0.1",
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "braintree": "^2.13.1",
+    "braintree-web-react": "^0.7.0",
     "classnames": "^2.2.6",
     "dotenv": "^6.0.0",
     "dotenv-webpack": "^1.5.7",
     "express": "^4.16.3",
     "helmet": "^3.13.0",
     "jss": "^9.8.7",
+    "morgan": "^1.9.1",
     "next": "^7.0.2",
     "node-sass": "^4.9.3",
     "nprogress": "^0.2.0",
@@ -44,7 +48,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.7"
   },
   "author": "Manny Colon, colonmanuel7@gmail.com",
   "license": "MIT"

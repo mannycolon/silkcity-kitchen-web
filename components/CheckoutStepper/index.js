@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 // core components
 import ShippingAddressForm from './ShippingAddressForm'
 import PaymentMethodForm from './PaymentMethodForm'
-import PlaceOrderContent from './PlaceOrderContent'
+import ReviewOrderContent from './ReviewOrderContent'
 
 const styles = (theme) => ({
   root: {
@@ -51,7 +51,7 @@ const styles = (theme) => ({
 })
 
 function getSteps() {
-  return ['Enter shipping address', 'Enter payment method', 'Place Order']
+  return ['Enter Shipping Address', 'Enter Payment Method', 'Review Your Order']
 }
 
 function getStepContent(step, state, handleChange) {
@@ -75,7 +75,7 @@ function getStepContent(step, state, handleChange) {
     case 1:
       return <PaymentMethodForm/>
     case 2:
-      return <PlaceOrderContent/>
+      return <ReviewOrderContent/>
     default:
       return 'Unknown step'
   }
@@ -147,7 +147,7 @@ class CheckoutStepper extends React.Component {
                         onClick={this.handleNext}
                         className={classes.nextButton}
                       >
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                        {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
                       </Button>
                     </div>
                   </div>
