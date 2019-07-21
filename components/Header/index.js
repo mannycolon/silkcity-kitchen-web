@@ -105,7 +105,7 @@ class Header extends Component {
           <div className={classes.leftSide}>
             <Link href="/" passHref>
               <a>
-                <img className={classes.logo} src="static/images/Silkcity kitchen Logo.png" alt="Silkcity kitchen Logo" />
+                <img className={classes.logo} src="static/images/Silkcity_kitchen_Logo.png" alt="Silkcity kitchen Logo" />
               </a>
             </Link>
             <Hidden xsDown>
