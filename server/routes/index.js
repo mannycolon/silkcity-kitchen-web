@@ -1,6 +1,3 @@
+const BraintreeRoutes = require('./braintree');
 
-import BraintreeRoutes from './braintree';
-
-export {
-  BraintreeRoutes
-}
+exports.BraintreeRoutes = BraintreeRoutes

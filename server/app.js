@@ -1,13 +1,13 @@
-import express from 'express'
-import next from 'next'
-import morgan from 'morgan'
-import helmet from 'helmet'
-import bodyParser from 'body-parser'
-import { BraintreeRoutes } from './routes'
+const express = require('express')
+const next = require('next')
+const morgan = require('morgan')
+const helmet = require('helmet')
+const bodyParser = require('body-parser')
+const { BraintreeRoutes } = require('./routes')
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = parseInt(process.env.PORT, 10) || 8000
-const ROOT_URL = dev ? `http://localhost:${port}` : 'https://PRODUCTION_URL'
+const ROOT_URL = dev ? `http://localhost:${port}` : process.env.PRODUCTION_URL
 
 const app = next({ dev })
 const handle = app.getRequestHandler()
@@ -19,6 +19,7 @@ app.prepare()
     const morganFormat = dev === 'production' ? 'combined' : 'dev'
 
     server.use(helmet())
+    server.use(express.json());
     server.use(morgan(morganFormat))
     server.use(bodyParser.json())
     server.use(bodyParser.urlencoded({ extended: true }))

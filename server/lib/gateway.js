@@ -1,6 +1,5 @@
 require('dotenv').config()
-import braintree from 'braintree'
-
+const braintree = require('braintree')
 const environment = process.env.BRAINTREE_ENVIRONMENT
 
 const gateway = braintree.connect({
@@ -10,4 +9,4 @@ const gateway = braintree.connect({
   privateKey: process.env.BRAINTREE_PRIVATE_KEY
 })
 
-export default gateway;
+module.exports = gateway;

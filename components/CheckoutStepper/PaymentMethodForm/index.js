@@ -60,7 +60,7 @@ class PaymentMethodForm extends Component {
   async componentDidMount() {
     try {
       // Get a client token for authorization from your server
-      const response = await axios.get('http://localhost:8000/api/braintree/v1/getToken')
+      const response = await axios.get('api/braintree/v1/getToken')
       const clientToken = response.data.clientToken
 
       this.setState({ clientToken })
@@ -75,7 +75,7 @@ class PaymentMethodForm extends Component {
       const { nonce } = await this.instance.tokenize()
 
       const response = await axios.post(
-        'http://localhost:8000/api/braintree/v1/sandbox',
+        'api/braintree/v1/sandbox',
         { paymentMethodNonce: nonce }
       )
 

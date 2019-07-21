@@ -1,6 +1,5 @@
-import { Router } from 'express'
-import gateway from '../../lib/gateway'
-
+const { Router } = require('express')
+const gateway = require('../../lib/gateway')
 const routes = new Router()
 
 routes.get('/braintree', (req, res) => {
@@ -45,4 +44,4 @@ routes.post('/braintree/v1/sandbox', async (req, res) => {
   }
 })
 
-export default routes
+module.exports = routes;

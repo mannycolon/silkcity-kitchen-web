@@ -26,7 +26,7 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props
-    const title = 'Silkcity Kitchen Meal prep';
+    const title = 'Silkcity Kitchen Meal Prep';
 
     return (
       <Container>
